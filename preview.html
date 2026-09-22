@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090719"><title>Feliz día ✨</title>
+<style>
+:root{--gold:#ffd84d;--cream:#fff4c7;--pink:#ffb7d5;--night:#090719}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#fff8df;font-family:"Trebuchet MS",system-ui,sans-serif;background:var(--night);overflow-x:hidden}
+.space{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 18% 20%,#3b246b77,transparent 38%),radial-gradient(ellipse at 82% 75%,#8b4a1870,transparent 34%),radial-gradient(ellipse at 50% 48%,#161d4b,#090719 70%)}
+.space:before{content:"";position:absolute;inset:-50%;background-image:radial-gradient(2px 2px at 10% 20%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 35% 72%,#ffe7a0 50%,transparent 60%),radial-gradient(2px 2px at 78% 33%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 61% 18%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 88% 84%,#ffd84d 50%,transparent 60%);background-size:370px 310px;opacity:.65;animation:drift 90s linear infinite}
+@keyframes drift{to{transform:translate(140px,100px) rotate(8deg)}}.nebula{position:fixed;z-index:-1;width:45vw;height:45vw;border-radius:50%;filter:blur(65px);opacity:.12;background:#b34bff;top:15%;left:25%;pointer-events:none}
+header{min-height:100svh;display:grid;place-items:center;text-align:center;padding:35px 20px}.hero{max-width:780px;animation:rise 1.3s ease both}.eyebrow{color:#ffe78c;text-transform:uppercase;letter-spacing:.25em;font-size:.75rem}
+h1{font-family:Georgia,serif;font-size:clamp(2.8rem,9vw,6.5rem);line-height:.98;font-weight:500;margin:22px 0;text-shadow:0 0 35px #ffcf5555}h1 span,h2 em{color:var(--gold);font-style:italic}.hero p{max-width:560px;margin:auto;color:#e9e3ff;font-size:clamp(1rem,2.5vw,1.2rem);line-height:1.8}
+.sunflower{display:inline-block;font-size:clamp(3rem,8vw,5.5rem);filter:drop-shadow(0 0 18px #ffd84d55);animation:sway 4s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}@keyframes rise{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+.scroll-cue{display:inline-flex;gap:9px;align-items:center;margin-top:34px;color:#ffe7a0;text-decoration:none;border:1px solid #ffe7a055;border-radius:99px;padding:12px 18px}
+main{padding:0 18px 80px}.intro{text-align:center;padding:65px 0 35px}h2{font:500 clamp(2rem,6vw,3.7rem)/1.1 Georgia,serif;margin:0 0 15px}.sub{color:#d7d0f2;line-height:1.7;max-width:650px;margin:auto}
+.galaxy-wrap{max-width:1100px;margin:25px auto 70px}.hint{text-align:center;font-size:.85rem;color:#c6bfe8;margin:0 0 14px}
+.galaxy{position:relative;height:min(78vh,760px);min-height:500px;overflow:hidden;border:1px solid #ffffff20;border-radius:30px;background:radial-gradient(ellipse at center,#4a2b7d66,transparent 58%),radial-gradient(ellipse at 50% 50%,#111536,#05050f 75%);box-shadow:0 25px 100px #0009,inset 0 0 100px #8c6aff22;touch-action:none;cursor:grab}
+.galaxy.dragging{cursor:grabbing}.galaxy canvas{display:block;width:100%;height:100%}.galaxy-label{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);padding:10px 15px;border:1px solid #ffe08b45;border-radius:99px;background:#080817aa;color:#ffe9a7;font-size:.85rem;text-align:center;white-space:nowrap;pointer-events:none}
+.message-output{text-align:center;min-height:66px;padding:20px 12px;color:#ffe9a7;font:italic 1.15rem Georgia,serif}
+.message{max-width:820px;margin:0 auto 75px;padding:clamp(25px,6vw,55px);border:1px solid #ffe08b38;border-radius:28px;background:linear-gradient(135deg,#ffffff0c,#8d67b31a);box-shadow:0 20px 60px #0004;text-align:center}
+.message .small{color:#ffdf79;letter-spacing:.18em;text-transform:uppercase;font-size:.72rem}.message p{color:#f0eafa;line-height:1.95;font-size:1.05rem}.signature{font:italic 1.7rem Georgia,serif;color:var(--gold);margin-top:24px}
+.cta{border:1px solid #ffe08b80;color:#fff2c3;background:#ffd84d15;border-radius:99px;padding:14px 23px;font:inherit;cursor:pointer;margin-top:12px}.cta:hover{background:#ffd84d2d;transform:translateY(-2px)}
+#surprise{display:none;margin:25px auto 0;color:#ffe8a1;font:italic clamp(1.2rem,4vw,2rem) Georgia,serif;line-height:1.5}#surprise.show{display:block;animation:rise .6s ease both}
+.note{text-align:center;max-width:650px;margin:auto;padding:25px 0 10px;color:#bdb5df;font-size:.82rem}footer{text-align:center;padding:30px 15px 45px;color:#a9a0cf;font-size:.8rem}
+@media(max-width:600px){.galaxy{height:68vh;min-height:500px;border-radius:20px}.galaxy-label{font-size:.72rem;max-width:90%;white-space:normal}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style></head>
+<body><div class="space"></div><div class="nebula"></div>
+<header id="inicio"><div class="hero"><div class="sunflower">✨</div><div class="eyebrow">Un pequeño universo</div>
+<h1>¡Feliz día!<br><span>✨ Que tengas un buen día ✨</span></h1>
+<p>Un pequeño detalle para desearte un día genial. Que hoy tengas buenas vibras, muchas risas y un montón de buenos momentos.</p>
+<a class="scroll-cue" href="#universo">Explora la galaxia ↓</a></div></header>
+<main><section class="intro" id="universo"><h2>Un momento para<br><em>desconectarte</em></h2><p class="sub">¡Una galaxia en 3D! Arrástrala para girarla, usa la rueda para acercarte y toca las palabras o estrellas que encuentres.</p></section>
+<section class="galaxy-wrap"><p class="hint">✦ Arrastra para girar · rueda/pellizca para ampliar · doble clic para centrar ✦</p>
+<div class="galaxy" id="galaxy"><canvas id="universe" aria-label="Galaxia tridimensional interactiva con flores amarillas y palabras de amor"></canvas><div class="galaxy-label">Gira la galaxia… hay mensajes escondidos ✨</div></div>
+<div class="message-output" id="flowerMessage" role="status" aria-live="polite">Toca una palabra o estrella para descubrir un mensaje 💫</div></section>
+<section class="message">
+<div class="sunflower">✨</div>
+<div class="small">Un mensajito para ti</div>
+<h2>¡Feliz día! <em>🫶</em></h2>
+<p>Solo pasaba por aquí para desearte un día bien bonito. Que te pasen cosas buenas, que te rías un montón y que hoy salga mejor de lo que esperabas.</p>
+<p>Y si el día está medio meh 😭, mínimo que esta galaxia te saque una sonrisita. Sigue siendo tú, disfruta y no dejes que nada te quite las buenas vibras.</p>
+<div class="signature">Que tengas un día increíble ✨</div>
+<button class="cta" id="surpriseBtn">Abrir otro mensajito 💫</button>
+<div id="surprise">Plot twist: este mensaje era una excusa para decirte que espero que hoy te vaya demasiado bien JAJA. 🌟</div>
+</section>
+<p class="note">Un pequeño universo de buenas vibras para alegrarte el día.</p></main>
+<footer>Un pequeño universo para desearte un buen día ✦</footer>
+<script>
+(() => {
+const canvas=document.getElementById('universe');
+const box=document.getElementById('galaxy');
+const ctx=canvas.getContext('2d',{alpha:true});
+const output=document.getElementById('flowerMessage');
+
+let W=0,H=0,DPR=1;
+let rotY=0.25,rotX=-0.18,zoom=1;
+let dragging=false,moved=false,lastX=0,lastY=0,downX=0,downY=0;
+let autoRotate=true;
+let lastTime=performance.now();
+
+const messages=[
+["✨","Feliz díaaa 😭✨ Espero que hoy te pasen cosas buenas y que todo te salga increíble."],
+["🌟","Que hoy tengas cero estrés, buenas noticias y mínimo una razón para reírte de algo JAJA."],
+["💫","Un pequeño recordatorio: disfruta el día, escucha música que te guste y pásala bien."],
+["⭐","Ojalá hoy sea de esos días que empiezan normal y terminan con una buena historia que contar."],
+["✨","Si el día está medio aburrido, aquí tienes una galaxia random para distraerte un rato 😭."],
+["🌙","Que te vaya bien en todo lo que tengas hoy. Tú tranqui, paso a paso y con buenas vibras."],
+["🌟","No hace falta que hoy sea perfecto. Con que tengas un buen momento ya cuenta. 🫶"],
+["💫","Espero que sonrías aunque sea por una tontería. A veces esas son las mejores partes del día."],
+["⭐","Feliz día. Que sobrevivas a las tareas, al sueño y a todo lo demás JAJA. 😭"],
+["✨","Te mando buenas vibras desde este rincón del universo. Que tengas un día brutal."]
+];
+
+const phrases=[
+"FELIZ DÍA","BUENAS VIBRAS","DISFRUTA","SONRÍE",
+"TODO BIEN","QUE TE VAYA GENIAL","✨","⭐","SIN ESTRÉS",
+"HOY SE PUEDE","PÁSALA BIEN","MODO RELAX"
+];
+
+const rand=(a,b)=>a+Math.random()*(b-a);
+
+const stars=Array.from({length:1050},()=>({
+ x:rand(-1.15,1.15), y:rand(-1.15,1.15), z:rand(-1,1),
+ r:rand(.25,1.35), a:rand(.3,.95), tw:rand(0,Math.PI*2)
+}));
+
+const dust=Array.from({length:700},()=>({
+ a:rand(0,Math.PI*2), r:Math.sqrt(Math.random())*.98,
+ z:rand(-.18,.18), size:rand(.3,1.8), a0:rand(.08,.48)
+}));
+
+const objects=Array.from({length:46},(_,i)=>({
+ type:"message",
+ a:rand(0,Math.PI*2),
+ r:rand(.25,.98),
+ z:rand(-.45,.45),
+ text:phrases[i%phrases.length],
+ m:i%messages.length,
+ phase:rand(0,Math.PI*2)
+}));
+
+function resize(){
+ const r=box.getBoundingClientRect();
+ W=Math.max(320,r.width);
+ H=Math.max(500,r.height);
+ DPR=Math.min(window.devicePixelRatio||1,2);
+ canvas.width=Math.floor(W*DPR);
+ canvas.height=Math.floor(H*DPR);
+ canvas.style.width=W+"px";
+ canvas.style.height=H+"px";
+ ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+
+function project(x,y,z){
+ const cy=Math.cos(rotY),sy=Math.sin(rotY);
+ const cx=Math.cos(rotX),sx=Math.sin(rotX);
+
+ let xx=x*cy-z*sy;
+ let zz=x*sy+z*cy;
+ let yy=y*cx-zz*sx;
+ zz=y*sx+zz*cx;
+
+ const base=Math.min(W,H)*.43*zoom;
+ const depth=3.5/(3.5+zz);
+ return {
+   x:W/2+xx*base*depth,
+   y:H/2+yy*base*depth,
+   scale:depth,
+   depth:zz
+ };
+}
+
+function spiralPoint(a,r,arm){
+ const twist=arm*Math.PI/2;
+ const t=a+twist;
+ return {
+   x:Math.cos(t)*r,
+   y:Math.sin(t)*r*.57,
+   z:Math.sin(t*2.1+arm)*.12
+ };
+}
+
+function draw(now=performance.now()){
+ ctx.clearRect(0,0,W,H);
+
+ // Background glow
+ let bg=ctx.createRadialGradient(W*.5,H*.48,0,W*.5,H*.48,Math.min(W,H)*.52);
+ bg.addColorStop(0,"rgba(126,79,215,.20)");
+ bg.addColorStop(.38,"rgba(67,58,164,.10)");
+ bg.addColorStop(1,"rgba(2,2,12,0)");
+ ctx.fillStyle=bg;
+ ctx.fillRect(0,0,W,H);
+
+ // Stars
+ for(const st of stars){
+   const p=project(st.x,st.y,st.z);
+   const tw=.72+.28*Math.sin(now*.0015+st.tw);
+   ctx.globalAlpha=st.a*tw;
+   ctx.fillStyle="#ffffff";
+   ctx.beginPath();
+   ctx.arc(p.x,p.y,Math.max(.35,st.r*p.scale),0,Math.PI*2);
+   ctx.fill();
+ }
+ ctx.globalAlpha=1;
+
+ // Galactic dust disk
+ ctx.save();
+ ctx.globalCompositeOperation="lighter";
+ for(const d of dust){
+   const p=project(
+     Math.cos(d.a)*d.r,
+     Math.sin(d.a)*d.r*.57,
+     d.z
+   );
+   ctx.globalAlpha=d.a0*(.55+.45*Math.sin(now*.0007+d.a*4));
+   ctx.fillStyle=(Math.sin(d.a*3)>0)?"#d9c6ff":"#ffe9ad";
+   ctx.beginPath();
+   ctx.arc(p.x,p.y,d.size*p.scale,0,Math.PI*2);
+   ctx.fill();
+ }
+ ctx.restore();
+ ctx.globalAlpha=1;
+
+ // Spiral arms
+ ctx.save();
+ ctx.lineCap="round";
+ for(let arm=0;arm<4;arm++){
+   for(let band=0;band<3;band++){
+     ctx.beginPath();
+     for(let i=0;i<=260;i++){
+       const q=i/260;
+       const a=q*5.8+.25+arm*Math.PI/2;
+       const r=.055+q*.94;
+       const wobble=(band-1)*.012;
+       const p=project(...Object.values(spiralPoint(a,r+wobble,arm)));
+       if(i===0)ctx.moveTo(p.x,p.y);
+       else ctx.lineTo(p.x,p.y);
+     }
+     ctx.strokeStyle=band===1?"rgba(202,166,255,.16)":"rgba(255,225,151,.07)";
+     ctx.lineWidth=band===1?1.4:.8;
+     ctx.stroke();
+   }
+ }
+ ctx.restore();
+
+ // Core
+ const core=project(0,0,0);
+ const R=Math.min(W,H)*.105*zoom;
+ const glow=ctx.createRadialGradient(core.x,core.y,0,core.x,core.y,R*2.5);
+ glow.addColorStop(0,"rgba(255,229,155,.45)");
+ glow.addColorStop(.2,"rgba(182,125,255,.27)");
+ glow.addColorStop(1,"rgba(80,40,150,0)");
+ ctx.fillStyle=glow;
+ ctx.beginPath();
+ ctx.arc(core.x,core.y,R*2.5,0,Math.PI*2);
+ ctx.fill();
+
+ const planet=ctx.createRadialGradient(core.x-R*.35,core.y-R*.4,R*.05,core.x,core.y,R*1.1);
+ planet.addColorStop(0,"#fff7ca");
+ planet.addColorStop(.15,"#efc4ff");
+ planet.addColorStop(.45,"#9a6de0");
+ planet.addColorStop(.78,"#30205e");
+ planet.addColorStop(1,"#080817");
+ ctx.save();
+ ctx.shadowColor="#b987ff";
+ ctx.shadowBlur=38;
+ ctx.fillStyle=planet;
+ ctx.beginPath();
+ ctx.arc(core.x,core.y,R,0,Math.PI*2);
+ ctx.fill();
+ ctx.restore();
+
+ // Ring
+ ctx.save();
+ ctx.translate(core.x,core.y);
+ ctx.rotate(-.15+rotY*.08);
+ ctx.scale(1,.25+Math.abs(Math.sin(rotX))*.13);
+ ctx.strokeStyle="rgba(255,225,123,.9)";
+ ctx.shadowColor="#ffd96a";
+ ctx.shadowBlur=18;
+ ctx.lineWidth=Math.max(2.5,R*.12);
+ ctx.beginPath();
+ ctx.ellipse(0,0,R*2.05,R*1.62,0,0,Math.PI*2);
+ ctx.stroke();
+ ctx.restore();
+
+ // Floating messages
+ const projected=[];
+ objects.forEach((o,i)=>{
+   const a=o.a+(now*.000018*(i%2?1:-1));
+   const yOffset=Math.sin(now*.001+o.phase)*.018;
+   const p=project(
+     Math.cos(a)*o.r,
+     Math.sin(a)*o.r*.62+yOffset,
+     o.z
+   );
+   projected.push({...o,...p});
+ });
+ projected.sort((a,b)=>a.depth-b.depth);
+
+ projected.forEach(o=>{
+   ctx.save();
+   const alpha=Math.min(.95,.35+o.scale*.62);
+   ctx.globalAlpha=alpha;
+   ctx.textAlign="center";
+   ctx.textBaseline="middle";
+   const size=Math.max(10,13*o.scale);
+
+   if(["✨","⭐"].includes(o.text)){
+     ctx.font=`${Math.max(18,27*o.scale)}px "Segoe UI Emoji",sans-serif`;
+     ctx.shadowColor="#ffe58a";
+     ctx.shadowBlur=12;
+     ctx.fillText(o.text,o.x,o.y);
+     o.hit=24;
+   }else{
+     ctx.font=`700 ${size}px system-ui,sans-serif`;
+     ctx.fillStyle="#ffe8a8";
+     ctx.shadowColor="#c98cff";
+     ctx.shadowBlur=10;
+     ctx.fillText(o.text,o.x,o.y);
+     o.hit=Math.max(20,size*.8);
+   }
+   ctx.restore();
+ });
+
+ window.__galaxyObjects=projected;
+}
+
+function pick(x,y){
+ const list=window.__galaxyObjects||[];
+ let best=null,bestD=Infinity;
+ for(const o of list){
+   const d=Math.hypot(x-o.x,y-o.y);
+   if(d<o.hit+10 && d<bestD){best=o;bestD=d;}
+ }
+ return best;
+}
+
+function pointerPos(e){
+ const r=canvas.getBoundingClientRect();
+ return {x:e.clientX-r.left,y:e.clientY-r.top};
+}
+
+canvas.addEventListener("pointerdown",e=>{
+ dragging=true;
+ moved=false;
+ autoRotate=false;
+ downX=lastX=e.clientX;
+ downY=lastY=e.clientY;
+ canvas.setPointerCapture(e.pointerId);
+ box.classList.add("dragging");
+});
+
+canvas.addEventListener("pointermove",e=>{
+ if(!dragging)return;
+ const dx=e.clientX-lastX;
+ const dy=e.clientY-lastY;
+ if(Math.abs(e.clientX-downX)+Math.abs(e.clientY-downY)>6)moved=true;
+ rotY+=dx*.008;
+ rotX=Math.max(-1.35,Math.min(1.35,rotX+dy*.006));
+ lastX=e.clientX;
+ lastY=e.clientY;
+ draw();
+});
+
+function endPointer(e){
+ if(!dragging)return;
+ dragging=false;
+ box.classList.remove("dragging");
+
+ if(!moved){
+   const p=pointerPos(e);
+   const hit=pick(p.x,p.y);
+   if(hit){
+     const msg=messages[hit.m];
+     output.textContent=msg[0]+" "+msg[1];
+   }else{
+     output.textContent="Explora un rato 👀✨ Hay mensajes escondidos por toda la galaxia.";
+   }
+ }
+}
+canvas.addEventListener("pointerup",endPointer);
+canvas.addEventListener("pointercancel",()=>{
+ dragging=false;
+ box.classList.remove("dragging");
+});
+
+canvas.addEventListener("wheel",e=>{
+ e.preventDefault();
+ zoom*=e.deltaY<0?1.09:.917;
+ zoom=Math.max(.55,Math.min(2.25,zoom));
+ draw();
+},{passive:false});
+
+canvas.addEventListener("dblclick",()=>{
+ zoom=1;
+ rotX=-.18;
+ rotY=.25;
+ autoRotate=true;
+ draw();
+});
+
+document.getElementById("surpriseBtn").addEventListener("click",()=>{
+ document.getElementById("surprise").classList.toggle("show");
+});
+
+window.addEventListener("resize",resize);
+
+function animate(now){
+ const dt=Math.min(40,now-lastTime);
+ lastTime=now;
+ if(autoRotate&&!dragging)rotY+=dt*.000045;
+ draw(now);
+ requestAnimationFrame(animate);
+}
+
+resize();
+requestAnimationFrame(animate);
+})();
+</script></body></html>
